@@ -122,9 +122,9 @@ function RegistrationPage() {
               ) : (
                 <>
                   <h1 className="mt-3 text-3xl font-semibold text-white">
-                    South-South Holy Ghost Experience Registration Form
+                    South-South Holy Ghost Experience
                   </h1>
-
+                  <p className="text-sm text-slate-400">Registration Form</p>
                   <form className="mt-8 grid gap-5" onSubmit={handleSubmit}>
                     <InputField
                       label="Name"

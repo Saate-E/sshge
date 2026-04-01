@@ -36,7 +36,7 @@ function LandingPage() {
       <main>
         <section className="mx-auto flex min-h-[calc(100vh-80px)] max-w-7xl items-center px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
           <div className="grid w-full items-center gap-8 rounded-3xl border border-white/10 bg-linear-to-br from-orange-950 via-slate-900 to-slate-950 p-6 shadow-2xl sm:gap-10 sm:p-8 md:p-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.95fr)] lg:p-14 xl:p-16">
-            <div className="order-2 w-full lg:order-1">
+            <div className="order-1 w-full">
               <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
                 HolyGhost Experience
               </h1>
@@ -78,14 +78,17 @@ function LandingPage() {
 
         <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
           <div className="grid gap-8 rounded-3xl border border-white/10 bg-slate-900 p-6 shadow-xl sm:p-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)] lg:p-10">
-            <div className="w-full h-[400px]">
+            <div className="aspect-video w-full">
               <video
                 className="h-full w-full object-cover"
                 controls
-                autoPlay
                 preload="metadata"
-                src={eventVideo}
-              ></video>
+                playsInline
+                poster={eventBanner}
+              >
+                <source src={eventVideo} type="video/mp4" />
+                Your browser does not support this video format.
+              </video>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
