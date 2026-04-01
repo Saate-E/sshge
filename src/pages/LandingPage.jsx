@@ -55,11 +55,11 @@ function LandingPage() {
               </div>
             </div>
 
-            <div className="order-1 flex w-full justify-center lg:order-2 lg:justify-end">
+            <div className="flex w-full justify-center lg:order-2 lg:justify-end">
               <img
                 src={eventBanner}
                 alt="HolyGhost Experience event banner"
-                className="h-60 w-full max-w-xl rounded-2xl border border-white/10 object-cover shadow-xl sm:h-72 md:h-80 lg:h-[420px] xl:h-[500px]"
+                className="h-[300px] w-full max-w-xl rounded-2xl border border-white/10 object-cover shadow-xl sm:h-72 md:h-80 lg:h-[420px] xl:h-[500px]"
               />
             </div>
           </div>
