@@ -338,7 +338,7 @@ function SuccessCard({ attendee }) {
         </div>
       </div>
       <p className="mt-5 text-sm text-slate-300">
-        Show this at entry/for seating/for follow-up.
+        Screenshot and Show this at the ENTRANCE.
       </p>
     </div>
   );

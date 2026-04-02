@@ -38,12 +38,10 @@ function LandingPage() {
           <div className="grid w-full items-center gap-8 rounded-3xl border border-white/10 bg-linear-to-br from-orange-950 via-slate-900 to-slate-950 p-6 shadow-2xl sm:gap-10 sm:p-8 md:p-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.95fr)] lg:p-14 xl:p-16">
             <div className="order-1 w-full">
               <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-                HolyGhost Experience
+                South-South Holy Ghost Experience
               </h1>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base sm:leading-8 md:text-lg">
-                South-South Holy Ghost Experience is a Light Nation event in
-                Port Harcourt where attendees can quickly register onsite and
-                receive a unique registration number instantly.
+                The Holy Ghost Experience by Light Nation (led by Femi Lazarus Ministries) is an extraordinary, high-energy gathering designed for prophetic encounter, divine restoration, and spiritual empowerment.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
@@ -101,7 +99,7 @@ function LandingPage() {
               <DetailCard
                 icon="location"
                 label="Venue"
-                value="Port Harcourt, Rivers State"
+                value="THE LIGHT PLACE, Plot 91 East West Road Rumuodumaya, Port Harcourt, Rivers State"
               />
             </div>
           </div>
