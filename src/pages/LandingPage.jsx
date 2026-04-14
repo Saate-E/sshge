@@ -22,7 +22,7 @@ function LandingPage() {
           <img
             src={headerLogo}
             alt="Light Nation"
-            className="h-10 w-auto rounded-lg object-cover sm:h-12 lg:h-14"
+            className="h-10 w-auto rounded-lg object-contain sm:h-12 lg:h-14"
           />
           <Link
             to="/register"
@@ -41,7 +41,7 @@ function LandingPage() {
                 South-South Holy Ghost Experience
               </h1>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base sm:leading-8 md:text-lg">
-                The Holy Ghost Experience by Light Nation (led by Femi Lazarus Ministries) is an extraordinary, high-energy gathering designed for prophetic encounter, divine restoration, and spiritual empowerment.
+                The Holy Ghost Experience by Light Nation (led by <strong><i>Femi Lazarus Ministries</i></strong>) is an extraordinary, high-energy gathering designed for prophetic encounter, divine restoration, and spiritual empowerment.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
@@ -57,7 +57,7 @@ function LandingPage() {
               <img
                 src={eventBanner}
                 alt="HolyGhost Experience event banner"
-                className="h-[300px] w-full max-w-xl rounded-2xl border border-white/10 object-cover shadow-xl sm:h-72 md:h-80 lg:h-[420px] xl:h-[500px]"
+                className="h-[300px] w-full max-w-xl object-contain sm:h-72 md:h-80 lg:h-[420px] xl:h-[500px]"
               />
             </div>
           </div>
@@ -99,7 +99,7 @@ function LandingPage() {
               <DetailCard
                 icon="location"
                 label="Venue"
-                value="THE LIGHT PLACE, Plot 91 East West Road Rumuodumaya, Port Harcourt, Rivers State"
+                value="EUI EVENT CENTER, Plot F11 Sani Abacha Road, G.R.A Phase III, Port Harcourt, Rivers State"
               />
             </div>
           </div>
