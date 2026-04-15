@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import headerLogo from "../assets/images.jpg";
+import headerLogo from "../assets/image.png";
 import eventBanner from "../assets/hero.jpg";
 import eventVideo from "../assets/Download.mp4";
 
@@ -17,20 +17,18 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
-      <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-950/90 backdrop-blur">
-        <div className="mx-auto flex min-h-20 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <img
-            src={headerLogo}
-            alt="Light Nation"
-            className="h-10 w-auto rounded-lg object-contain sm:h-12 lg:h-14"
-          />
-          <Link
-            to="/register"
-            className="shrink-0 rounded-full bg-orange-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-orange-400 sm:px-5 sm:py-2.5"
-          >
-            Register
-          </Link>
-        </div>
+      <header className="sticky top-0 z-20 border-b flex h-24 items-center justify-between border-white/10 bg-slate-950/90 backdrop-blur">
+        <img
+          src={headerLogo}
+          alt="Light Nation"
+          className="lg:w-[15%] w-[20%] object-contain"
+        />
+        <Link
+          to="/register"
+          className="rounded-full mr-10 bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-400"
+        >
+          Register
+        </Link>
       </header>
 
       <main>
@@ -41,7 +39,13 @@ function LandingPage() {
                 South-South Holy Ghost Experience
               </h1>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base sm:leading-8 md:text-lg">
-                The Holy Ghost Experience by Light Nation (led by <strong><i>Femi Lazarus Ministries</i></strong>) is an extraordinary, high-energy gathering designed for prophetic encounter, divine restoration, and spiritual empowerment.
+                The Holy Ghost Experience by Light Nation (led by{" "}
+                <strong>
+                  <i>Femi Lazarus Ministries</i>
+                </strong>
+                ) is an extraordinary, high-energy gathering designed for
+                prophetic encounter, divine restoration, and spiritual
+                empowerment.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
@@ -95,7 +99,7 @@ function LandingPage() {
                 label="Date"
                 value={timeLeft.targetLabel}
               />
-              <DetailCard icon="clock" label="Time" value="5:00 PM" />
+              <DetailCard icon="clock" label="Time" value="4:00 PM" />
               <DetailCard
                 icon="location"
                 label="Venue"

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import html2canvas from "html2canvas";
 import { Link } from "react-router-dom";
-import headerLogo from "../assets/images.jpg";
+import headerLogo from "../assets/image.png";
+import { DownloadIcon } from "lucide-react";
 import {
   contactOptions,
   genderOptions,
@@ -23,7 +25,6 @@ const defaultForm = {
   stateOfResidence: "",
   occupation: "",
   isMember: "",
-  wantsMembership: "",
   heardAboutEvent: "",
   wantsNextContact: "",
   expectations: "",
@@ -36,6 +37,20 @@ function RegistrationPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    if (
+      name === "isMember" &&
+      value === "No (Just attending the South-South Holy Ghost Experience)"
+    ) {
+      setForm((current) => ({
+        ...current,
+        isMember: value,
+        heardAboutEvent: "",
+        wantsNextContact: "",
+      }));
+      return;
+    }
+
     setForm((current) => ({ ...current, [name]: value }));
   };
 
@@ -54,14 +69,18 @@ function RegistrationPage() {
     if (!form.occupation.trim())
       nextErrors.occupation = "Occupation is required.";
     if (!form.isMember) nextErrors.isMember = "Please choose an option.";
-    if (!form.wantsMembership)
-      nextErrors.wantsMembership = "Please choose an option.";
-    if (!form.heardAboutEvent) {
-      nextErrors.heardAboutEvent =
-        "Please select how you heard about the event.";
-    }
-    if (!form.wantsNextContact) {
-      nextErrors.wantsNextContact = "Please choose an option.";
+    if (
+      form.isMember ===
+      "No (Just attending the South-South Holy Ghost Experience)"
+    ) {
+      if (!form.heardAboutEvent) {
+        nextErrors.heardAboutEvent =
+          "Please select how you heard about the event.";
+      }
+
+      if (!form.wantsNextContact) {
+        nextErrors.wantsNextContact = "Please choose an option.";
+      }
     }
     if (!form.expectations.trim()) {
       nextErrors.expectations = "Please tell us your expectations.";
@@ -97,20 +116,18 @@ function RegistrationPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
-      <header className="sticky top-0 z-20 border-b border-white/10 bg-slate-950/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
-          <img
-            src={headerLogo}
-            alt="Light Nation"
-            className="h-12 w-auto rounded-lg object-cover sm:h-14"
-          />
-          <Link
-            to="/"
-            className="rounded-full bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-400"
-          >
-            Home
-          </Link>
-        </div>
+      <header className="sticky top-0 z-20 border-b flex h-24 items-center justify-between border-white/10 bg-slate-950/90 backdrop-blur">
+        <img
+          src={headerLogo}
+          alt="Light Nation"
+          className="lg:w-[15%] w-[20%] object-contain"
+        />
+        <Link
+          to="/"
+          className="rounded-full mr-10 bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-400"
+        >
+          Home
+        </Link>
       </header>
 
       <main>
@@ -183,30 +200,30 @@ function RegistrationPage() {
                       error={errors.isMember}
                       options={membershipOptions}
                     />
-                    <SelectField
-                      label="Would you like to become a member of Light Nation?"
-                      name="wantsMembership"
-                      value={form.wantsMembership}
-                      onChange={handleChange}
-                      error={errors.wantsMembership}
-                      options={membershipInterestOptions}
-                    />
-                    <SelectField
-                      label="How did you hear about the South-South Holy Ghost Experience?"
-                      name="heardAboutEvent"
-                      value={form.heardAboutEvent}
-                      onChange={handleChange}
-                      error={errors.heardAboutEvent}
-                      options={referralOptions}
-                    />
-                    <SelectField
-                      label="Would you like to be contacted for the next South-South Holy Ghost Experience / Other programs?"
-                      name="wantsNextContact"
-                      value={form.wantsNextContact}
-                      onChange={handleChange}
-                      error={errors.wantsNextContact}
-                      options={contactOptions}
-                    />
+
+                    {form.isMember ===
+                      "No (Just attending the South-South Holy Ghost Experience)" && (
+                      <>
+                        <SelectField
+                          label="How did you hear about the South-South Holy Ghost Experience?"
+                          name="heardAboutEvent"
+                          value={form.heardAboutEvent}
+                          onChange={handleChange}
+                          error={errors.heardAboutEvent}
+                          options={referralOptions}
+                        />
+
+                        <SelectField
+                          label="Would you like to be contacted for the next South-South Holy Ghost Experience / Other programs?"
+                          name="wantsNextContact"
+                          value={form.wantsNextContact}
+                          onChange={handleChange}
+                          error={errors.wantsNextContact}
+                          options={contactOptions}
+                        />
+                      </>
+                    )}
+
                     <TextAreaField
                       label="What are your expectations for the South-South Holy Ghost Experience?"
                       name="expectations"
@@ -315,31 +332,78 @@ function TextAreaField({ label, name, value, onChange, error, placeholder }) {
 }
 
 function SuccessCard({ attendee }) {
+  const cardRef = useRef();
+
+  const handleDownload = async () => {
+    if (!cardRef.current) return;
+
+    try {
+      const canvas = await html2canvas(cardRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#0f172a", // IMPORTANT (slate-950 equivalent)
+      });
+
+      const image = canvas.toDataURL("image/png");
+
+      const link = document.createElement("a");
+      link.href = image;
+      link.download = `${attendee.name}-registration.png`;
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
+  };
+
   return (
-    <div className="rounded-3xl border border-orange-400/30 bg-slate-900 p-6 shadow-lg">
-      <p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-200">
-        Success Card
-      </p>
-      <h2 className="mt-4 text-2xl font-semibold text-white">
-        ✅ You are successfully registered
-      </h2>
-      <div className="mt-6 space-y-4">
-        <div className="rounded-2xl border border-white/10 bg-slate-950 p-4">
-          <p className="text-sm text-slate-400">👤 User&apos;s Name</p>
-          <p className="mt-1 text-xl font-semibold text-white">
-            {attendee.name}
-          </p>
+    <div>
+      {/* CARD */}
+      <div
+        ref={cardRef}
+        className="rounded-3xl border border-orange-400/30 bg-slate-900 p-6 shadow-lg"
+      >
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-200">
+          Success Card
+        </p>
+
+        <h2 className="mt-4 text-2xl font-semibold text-white">
+          ✅ You are successfully registered
+        </h2>
+
+        <div className="mt-6 space-y-4">
+          <div className="rounded-2xl border border-white/10 bg-slate-950 p-4">
+            <p className="text-sm text-slate-400">👤 User&apos;s Name</p>
+            <p className="mt-1 text-xl font-semibold text-white">
+              {attendee.name}
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-slate-950 p-4">
+            <p className="text-sm text-slate-400">🔢 Registration Number</p>
+            <p className="mt-1 text-3xl font-bold tracking-[0.2em] text-orange-300">
+              {attendee.registrationNumber}
+            </p>
+          </div>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-slate-950 p-4">
-          <p className="text-sm text-slate-400">🔢 Registration Number</p>
-          <p className="mt-1 text-3xl font-bold tracking-[0.2em] text-orange-300">
-            {attendee.registrationNumber}
-          </p>
-        </div>
+
+        <p className="mt-5 text-sm text-slate-300">
+          Screenshot and Show this at the ENTRANCE.
+        </p>
       </div>
-      <p className="mt-5 text-sm text-slate-300">
-        Screenshot and Show this at the ENTRANCE.
-      </p>
+
+      {/* <div className="mt-4 flex justify-end">
+        <div
+          onClick={handleDownload}
+          className="cursor-pointer flex items-center gap-2 text-orange-300 hover:text-orange-400 transition"
+          title="Download Card"
+        >
+          Download
+          <DownloadIcon size={20} />
+        </div>
+      </div> */}
     </div>
   );
 }

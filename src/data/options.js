@@ -42,7 +42,7 @@ export const genderOptions = ['Male', 'Female']
 
 export const membershipOptions = [
   'Yes',
-  'No (I only came for the South-South Holy Ghost Experience)',
+  'No (Just attending the South-South Holy Ghost Experience)',
 ]
 
 export const membershipInterestOptions = [
