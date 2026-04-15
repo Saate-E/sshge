@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import html2canvas from "html2canvas";
 import { Link } from "react-router-dom";
 import headerLogo from "../assets/image.png";
-import { DownloadIcon } from "lucide-react";
 import {
   contactOptions,
   genderOptions,
