@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import headerLogo from "../assets/image.png";
 import eventBanner from "../assets/hero.jpg";
-import eventVideo from "../assets/IMG_2111.MOV";
+import eventVideo from "../assets/IMG_2111.mp4";
 
 function LandingPage() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
