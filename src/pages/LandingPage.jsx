@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import headerLogo from "../assets/image.png";
 import eventBanner from "../assets/hero.jpg";
-import eventVideo from "../assets/Download.mp4";
+import eventVideo from "../assets/IMG_2111.MOV";
 
 function LandingPage() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const intervalId = window.setInterval(() => {
@@ -13,6 +14,27 @@ function LandingPage() {
     }, 1000);
 
     return () => window.clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoRef.current?.play();
+          } else {
+            videoRef.current?.pause();
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -25,7 +47,7 @@ function LandingPage() {
         />
         <Link
           to="/register"
-          className="rounded-full mr-10 bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-400"
+          className="rounded-full mr-5 lg:mr-8 bg-orange-500 px-8 py-1.5 text-sm font-semibold text-white transition hover:bg-orange-400"
         >
           Register
         </Link>
@@ -82,10 +104,12 @@ function LandingPage() {
           <div className="grid gap-8 rounded-3xl border border-white/10 bg-slate-900 p-6 shadow-xl sm:p-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)] lg:p-10">
             <div className="aspect-video w-full">
               <video
+                ref={videoRef}
                 className="h-full w-full object-cover"
                 controls
                 preload="metadata"
                 playsInline
+                autoPlay
                 poster={eventBanner}
               >
                 <source src={eventVideo} type="video/mp4" />
